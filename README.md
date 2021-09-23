@@ -12,6 +12,8 @@ code as well as consistency (in language and logic) between code, tests and requ
 
 ## Better Code Hub
 
-The original score of the code on [bettercodehub.com](https://bettercodehub.com/) was 5/10: ![BCH compliance](https://bettercodehub.com/edge/badge/emilybache/GildedRose-Refactoring-Kata?branch=master)
+After forking the repo and deleting everything but 2 production and 1 test Java classes, the score was 7/10.
 
 I am curious which score my solution will yield, but it is not my goal to maximize it.
+
+Current scrore: ![BCH compliance](https://bettercodehub.com/edge/badge/Pfiver/GildedRose-Refactoring-Kata?branch=main)
