@@ -1,8 +1,20 @@
 package com.gildedrose;
 
-public class TexttestFixture {
-    public static void main(String[] args) {
-        System.out.println("OMGHAI!");
+import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class GildedRoseTest {
+
+    @Test
+    void test() throws Exception {
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        var out = new java.io.PrintStream(bos);
+
+        out.println("OMGHAI!");
 
         Item[] items = new Item[] {
                 new Item("+5 Dexterity Vest", 10, 20), //
@@ -18,20 +30,19 @@ public class TexttestFixture {
 
         GildedRose app = new GildedRose(items);
 
-        int days = 2;
-        if (args.length > 0) {
-            days = Integer.parseInt(args[0]) + 1;
-        }
+        int days = 30 + 1;
 
         for (int i = 0; i < days; i++) {
-            System.out.println("-------- day " + i + " --------");
-            System.out.println("name, sellIn, quality");
+            out.println("-------- day " + i + " --------");
+            out.println("name, sellIn, quality");
             for (Item item : items) {
-                System.out.println(item);
+                out.println(item);
             }
-            System.out.println();
+            out.println();
             app.updateQuality();
         }
-    }
 
+        String expected = new String(GildedRose.class.getResourceAsStream("/30-days.txt").readAllBytes());
+        assertEquals(expected, bos.toString());
+    }
 }
