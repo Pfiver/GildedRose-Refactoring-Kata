@@ -39,13 +39,13 @@
 
     - "Sulfuras" has a fixed Quality of 80 that never changes
 
-	- Every night "Aged Brie" Quality is increased by one
-	- Every night "Backstage passes" Quality is increased by one
-    - Every night "Backstage passes" Quality increases by 2 when the expiry date is in 10 days or less
-    - Every night "Backstage passes" Quality increases by 3 when the expiry date is in 5 days or less
-    - Every night "Backstage passes" Quality drops to 0 when the expiry date has passed
+	- Every night "Aged Brie" Quality is increased by 1
+	- Every night "Backstage passes" when the expiry date is in more than 10 days Quality is increased by 1
+    - Every night "Backstage passes" when the expiry date is in 10 days or less Quality increases by 2
+    - Every night "Backstage passes" when the expiry date is in 5 days or less Quality increases by 3
+    - For "Backstage passes" when the expiry date has passed Quality drops to 0
 
-	- Every night all normal items whose expiry date has not yet passed Quality is decreased by one
-	- Every night all normal items whose expiry date has passed Quality is decreased by two
+	- Every night all normal items whose expiry date has not yet passed Quality is decreased by 1
+	- Every night all normal items whose expiry date has passed Quality is decreased by 2
 
 	- [TODO] "Conjured" items degrade in Quality twice as fast as normal items
