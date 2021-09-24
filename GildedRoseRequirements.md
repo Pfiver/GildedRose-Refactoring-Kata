@@ -20,7 +20,7 @@
     When any amount of time has past,
     Then it still does not expire.
 
-## Story 2: stock item quality estimation
+## Story 2: Stock Item Quality Estimation
     As a store manager,
     I want to know the estimated quality of all items on offer,
     so that I can adjust their price and position in the shelf accordingly.

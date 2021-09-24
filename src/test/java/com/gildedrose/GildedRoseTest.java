@@ -37,7 +37,7 @@ public class GildedRoseTest {
                 out.println(item);
             }
             out.println();
-            app.updateQuality();
+            app.updateExpiryDateAndQuality();
         }
 
         String expected = new String(GildedRose.class.getResourceAsStream("/30-days.txt").readAllBytes());
