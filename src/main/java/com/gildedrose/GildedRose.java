@@ -15,7 +15,6 @@ public final class GildedRose {
     }
 
     public void updateExpiryDateAndQuality() {
-
         Arrays.stream(items).forEach(item -> {
             updateExpiryDate(item);
             updateQuality(item);

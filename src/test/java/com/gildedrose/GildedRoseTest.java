@@ -3,44 +3,50 @@ package com.gildedrose;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
+import java.net.URL;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GildedRoseTest {
 
+    Item[] items = {
+            new Item("+5 Dexterity Vest", 10, 20),
+            new Item("Aged Brie", 2, 0),
+            new Item("Elixir of the Mongoose", 5, 7),
+            new Item("Sulfuras, Hand of Ragnaros", 0, 80),
+            new Item("Sulfuras, Hand of Ragnaros", -1, 80),
+            new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
+            new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
+            new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+            // this conjured item does not work properly yet
+            new Item("Conjured Mana Cake", 3, 6)
+    };
+
+    GildedRose sut = new GildedRose(items);
+
     @Test
     void test() throws Exception {
 
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        var out = new java.io.PrintStream(bos);
+        URL testDataResource = Objects.requireNonNull(GildedRose.class.getResource("/30-days.txt"));
+        String expected = new String(testDataResource.openStream().readAllBytes());
 
-        Item[] items = new Item[] {
-                new Item("+5 Dexterity Vest", 10, 20), //
-                new Item("Aged Brie", 2, 0), //
-                new Item("Elixir of the Mongoose", 5, 7), //
-                new Item("Sulfuras, Hand of Ragnaros", 0, 80), //
-                new Item("Sulfuras, Hand of Ragnaros", -1, 80),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
-                // this conjured item does not work properly yet
-                new Item("Conjured Mana Cake", 3, 6) };
+        var bos = new ByteArrayOutputStream();
+        try (var out = new java.io.PrintStream(bos)) {
+            for (int day = 0; day <= 30; day++) {
 
-        GildedRose app = new GildedRose(items);
+                out.println("-------- day " + day + " --------");
+                out.println("name, sellIn, quality");
+                for (Item item : items) {
+                    out.println(item);
+                }
+                out.println();
 
-        int days = 30 + 1;
-
-        for (int i = 0; i < days; i++) {
-            out.println("-------- day " + i + " --------");
-            out.println("name, sellIn, quality");
-            for (Item item : items) {
-                out.println(item);
+                sut.updateExpiryDateAndQuality();
             }
-            out.println();
-            app.updateExpiryDateAndQuality();
         }
+        String actual = bos.toString();
 
-        String expected = new String(GildedRose.class.getResourceAsStream("/30-days.txt").readAllBytes());
-        assertEquals(expected, bos.toString());
+        assertEquals(expected, actual);
     }
 }
