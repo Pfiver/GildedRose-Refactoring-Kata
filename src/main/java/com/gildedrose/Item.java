@@ -12,7 +12,11 @@ public class Item {
         this.quality = quality;
     }
 
-   @Override
+    protected void adjustQuality(int amount) {
+        quality += amount > 0 ? Math.min(50 - quality, amount) : Math.max(-quality, amount);
+    }
+
+    @Override
    public String toString() {
         return this.name + ", " + this.expiresIn + ", " + this.quality;
     }

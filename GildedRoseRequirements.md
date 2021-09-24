@@ -32,7 +32,7 @@
     When z days have past,
     Then its quality estimate shall be determined by the algorithm.
 
-### Quality Estimation Function
+### Quality Estimation Algorithm
 
 	- The Quality of an item is never negative
 	- The Quality of an item is never more than 50
