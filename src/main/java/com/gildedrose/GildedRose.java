@@ -2,8 +2,6 @@ package com.gildedrose;
 
 import java.util.Arrays;
 
-import static com.gildedrose.QuallityEstimationAlgorithm.updateQuality;
-
 public final class GildedRose {
 
     public static final String AGED_BRIE = "Aged Brie";
@@ -19,7 +17,7 @@ public final class GildedRose {
     public void updateExpiryDateAndQuality() {
         Arrays.stream(items).forEach(item -> {
             updateExpiryDate(item);
-            updateQuality(item);
+            new QuallityEstimationAlgorithm(item).apply();
         });
     }
 

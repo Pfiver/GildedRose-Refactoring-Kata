@@ -2,35 +2,41 @@ package com.gildedrose;
 
 import static com.gildedrose.GildedRose.*;
 
-public class QuallityEstimationAlgorithm {
+public final class QuallityEstimationAlgorithm {
 
-    static void updateQuality(Item item) {
+    private final Item item;
+
+    QuallityEstimationAlgorithm(Item item) {
+        this.item = item;
+    }
+
+    void apply() {
         switch (item.name) {
             case SULFURAS ->        {}
-            case AGED_BRIE ->       updateAgedBrieQuality(item);
-            case BACKSTAGE_PASS ->  updateBackstagePassQuality(item);
-            default ->              updateStandardItemQuality(item);
+            case AGED_BRIE ->       updateAgedBrieQuality();
+            case BACKSTAGE_PASS ->  updateBackstagePassQuality();
+            default ->              updateStandardItemQuality();
         }
     }
 
-    private static void updateAgedBrieQuality(Item item) {
-        adjustQuality(item, 1);
-        if (item.expiresIn < 0) adjustQuality(item, 1);
+    private void updateAgedBrieQuality() {
+        adjustQuality(1);
+        if (item.expiresIn < 0) adjustQuality(1);
     }
 
-    private static void updateBackstagePassQuality(Item item) {
-        adjustQuality(item, 1);
-        if (item.expiresIn < 10) adjustQuality(item, 1);
-        if (item.expiresIn < 5) adjustQuality(item, 1);
-        if (item.expiresIn < 0) adjustQuality(item, Integer.MIN_VALUE);
+    private void updateBackstagePassQuality() {
+        adjustQuality(1);
+        if (item.expiresIn < 10) adjustQuality(1);
+        if (item.expiresIn < 5) adjustQuality(1);
+        if (item.expiresIn < 0) adjustQuality(Integer.MIN_VALUE);
     }
 
-    private static void updateStandardItemQuality(Item item) {
-        adjustQuality(item, -1);
-        if (item.expiresIn < 0) adjustQuality(item, -1);
+    private void updateStandardItemQuality() {
+        adjustQuality(-1);
+        if (item.expiresIn < 0) adjustQuality(-1);
     }
 
-    private static void adjustQuality(Item item, int amount) {
+    private void adjustQuality(int amount) {
         item.quality += amount <= 0
                 ? Math.max(-item.quality, amount)
                 : Math.min(50 - item.quality, amount);
