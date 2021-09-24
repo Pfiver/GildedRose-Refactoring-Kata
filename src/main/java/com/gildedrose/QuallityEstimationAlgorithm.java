@@ -14,19 +14,25 @@ public class QuallityEstimationAlgorithm {
     }
 
     private static void updateAgedBrieQuality(Item item) {
-        item.adjustQuality(1);
-        if (item.expiresIn < 0) item.adjustQuality(1);
+        adjustQuality(item, 1);
+        if (item.expiresIn < 0) adjustQuality(item, 1);
     }
 
     private static void updateBackstagePassQuality(Item item) {
-        item.adjustQuality(1);
-        if (item.expiresIn < 10) item.adjustQuality(1);
-        if (item.expiresIn < 5) item.adjustQuality(1);
-        if (item.expiresIn < 0) item.adjustQuality(Integer.MIN_VALUE);
+        adjustQuality(item, 1);
+        if (item.expiresIn < 10) adjustQuality(item, 1);
+        if (item.expiresIn < 5) adjustQuality(item, 1);
+        if (item.expiresIn < 0) adjustQuality(item, Integer.MIN_VALUE);
     }
 
     private static void updateStandardItemQuality(Item item) {
-        item.adjustQuality(-1);
-        if (item.expiresIn < 0) item.adjustQuality(-1);
+        adjustQuality(item, -1);
+        if (item.expiresIn < 0) adjustQuality(item, -1);
+    }
+
+    private static void adjustQuality(Item item, int amount) {
+        item.quality += amount <= 0
+                ? Math.max(-item.quality, amount)
+                : Math.min(50 - item.quality, amount);
     }
 }
